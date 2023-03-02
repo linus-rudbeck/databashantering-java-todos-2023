@@ -14,6 +14,7 @@ public class Main {
             switch (menuOption){
                 case 1 -> selectUser();
                 case 2 -> showTasks();
+                case 3 -> addTask();
             }
         }
     }
@@ -33,6 +34,7 @@ public class Main {
                 System.out.println("Selected user: " + selectedUsername);
                 System.out.println("1: Select user");
                 System.out.println("2: Show tasks");
+                System.out.println("3: Add task");
                 System.out.println("0: Exit");
 
                 System.out.print("Select option: ");
@@ -91,5 +93,18 @@ public class Main {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private static void addTask(){
+        System.out.print("Enter task title: ");
+        var title = scanner.next();
+
+        var tasksDb = new TasksDatabase();
+
+        tasksDb.insertTask(selectedUser.userId, title);
+
+        System.out.println("Task created");
+
+        pauseForInput();
     }
 }

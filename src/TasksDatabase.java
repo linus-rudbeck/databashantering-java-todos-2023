@@ -1,5 +1,6 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +35,26 @@ public class TasksDatabase extends DatabaseManager{
         }
 
         return tasks;
+    }
+
+    public void insertTask(int userId, String title){
+
+        String query = "INSERT INTO tasks (user_id, title) VALUES (?, ?);";
+
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+            stmt.setString(2, title);
+
+            stmt.execute();
+
+            stmt.close();
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
     }
 }
